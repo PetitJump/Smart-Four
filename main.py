@@ -33,12 +33,13 @@ class Jeu:
                         self.gagant = pion # On définit le gagnant (cela nous servira dans la méthode 'afficher_gagnant()')
                         return False # Il y a une ligne vertical
         return True
-                    
 
     def afficher_gagant(self) -> str:
+        """Methode qui renvoie le gagant de la partie"""
         print(f"La partie est fini, le gagant est le joueur {self.gagant}")
 
     def game(self) -> None:
+        """Methode principal de la class Jeu"""
         i = 1
         while self.continuer():
             i += 1
