@@ -2,6 +2,10 @@
 # En construction...
 # Réplique du jeu SMART FOUR de Giiker
 
+Pour un soucis de simpliciter on ne prendra que les puissance en horizontal et vertical
 
 ### But du jeu :
+...
+
+### Idée amélioration :
 ...
