@@ -9,26 +9,36 @@ class Jeu:
     def ajouter_pion(self, x: int, y: int, joueur: int) -> None:
         """Ajoute un pion au plateau en fonctions des pions déjà en place"""
         for k in self.plateau:
-            if self.plateau[k[f"ligne {y}"][x + 1]] == 0:
-                self.plateau[k[f"ligne {y}"][x + 1]] = joueur
+            if self.plateau[k][f"ligne {y}"][x + 1] == 0:
+                self.plateau[k][f"ligne {y}"][x + 1] = joueur
                 break
 
     def continuer(self) -> bool:
         """Renvoie True si il n'y a aucun gagnant, sinon False"""
-        ### Vérification horizontal ###
-        for pion in range(1, 3):
-            for k in self.plateau:
-                for y in self.plateau[k]:
-                    liste: list = self.plateau[k][y]
-                    if liste[1:4] == [pion, pion, pion] and (liste[0] == pion or liste[4] == pion):
-                        self.gagant = pion # On définit le gagnant (cela nous servira plus tard)
-                        return False # Il y a une ligne horizontal
         
-                
+        for pion in range(1, 3):
+            for nv in self.plateau: # Parcour par niveau
 
+                ### Vérification horizontal ###
+                for y in self.plateau[nv]: # Parcour par ligne
+                    liste: list = self.plateau[nv][y]
+                    if liste[1:4] == [pion]*3 and (liste[0] == pion or liste[4] == pion):
+                        self.gagant = pion # On définit le gagnant (cela nous servira dans la méthode 'afficher_gagnant()')
+                        return False # Il y a une ligne horizontal
+                ### Vérification vertical ###
+                rendu = [[], [], [], [], []] # On initialise
+                for ligne in self.plateau[nv]:
+                    for i in range(5):
+                        rendu[i].append(self.plateau[nv][ligne][i])
+                for liste in rendu:
+                    if liste[1:4] == [pion]*3 and (liste[0] == pion or liste[4] == pion):
+                        self.gagant = pion # On définit le gagnant (cela nous servira dans la méthode 'afficher_gagnant()')
+                        return False # Il y a une ligne vertical
+        return True
+                    
 
     def afficher_gagant(self) -> str:
-        print("Fonction en construction")
+        print(f"La partie est fini, le gagant est le joueur {self.gagant}")
 
     def game(self) -> None:
         i = 1
