@@ -21,8 +21,9 @@ class Jeu:
                 for y in self.plateau[k]:
                     liste: list = self.plateau[k][y]
                     if liste[1:4] == [pion, pion, pion] and (liste[0] == pion or liste[4] == pion):
+                        self.gagant = pion # On définit le gagnant (cela nous servira plus tard)
                         return False # Il y a une ligne horizontal
-                
+        
                 
 
 
